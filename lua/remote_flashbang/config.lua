@@ -6,7 +6,6 @@ local config = {}
 --- Default values:
 ---@eval return MiniDoc.afterlines_to_code(MiniDoc.current.eval_section)
 config.options = {
-    duration = 2.5,
     username = "",
     displayname = "",
     endpoint = "",
