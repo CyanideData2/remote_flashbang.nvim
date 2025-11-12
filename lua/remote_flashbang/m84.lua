@@ -1,4 +1,4 @@
-local config = require("remote_flashbang.config")
+local flashbang = require("flashbang")
 local network = require("remote_flashbang.network")
 local debugPrint = require("remote_flashbang.debug")
 
@@ -15,7 +15,7 @@ function grenade.pullPin()
                     print("Couldn't obtain flashes from server")
                 else
                     for _, v in pairs(messages) do
-                        -- deploy(v)[TODO] call lia function
+                        flashbang.deploy()
                     end
                 end
             end)
