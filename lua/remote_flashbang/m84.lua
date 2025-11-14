@@ -1,4 +1,3 @@
-local flashbang = require("flashbang")
 local network = require("remote_flashbang.network")
 local debugPrint = require("remote_flashbang.debug")
 
@@ -12,10 +11,10 @@ function grenade.pullPin()
             counter = counter + 1
             network.getFlash(function(messages, err)
                 if err then
-                    print("Couldn't obtain flashes from server")
+                    debugPrint("Couldn't obtain flashes from server", true)
                 else
                     for _, v in pairs(messages) do
-                        -- flashbang.deploy()
+                        -- require("flashbang").deploy()
                         print("bang!!!")
                     end
                 end

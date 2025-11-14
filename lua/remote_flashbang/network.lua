@@ -55,7 +55,7 @@ end
 ---@return user[]
 function Network.getUsers(callback)
     local url = config.options.endpoint .. "/get_users_active"
-    vim.system({ "curl", }, { url }, function(result)
+    vim.system({ "curl", url }, {}, function(result)
         if result.code ~= 0 then
             callback(nil, "Error: getUsers couldn't get messages")
             return

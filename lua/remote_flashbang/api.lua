@@ -31,13 +31,13 @@ local function completionWatcher()
             coroutine.yield()
             counter = counter + 1
             debugPrint("getUsers" .. counter, false)
-            -- network.getUsers(function(messages, err)
-            --     if err then
-            --         debugPrint(err, true)
-            --     else
-            --         autocompletion = messages
-            --     end
-            -- end)
+            network.getUsers(function(messages, err)
+                if err then
+                    debugPrint(err, true)
+                else
+                    autocompletion = messages
+                end
+            end)
         end
     end)
     local function checkCompletion()
