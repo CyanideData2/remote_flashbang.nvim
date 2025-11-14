@@ -1,6 +1,6 @@
-local network = require("flashbang.network")
-local config = require("flashbang.config")
-local debugPrint = require("flashbang.debug")
+local network = require("remote_flashbang.network")
+local config = require("remote_flashbang.config")
+local debugPrint = require("remote_flashbang.debug")
 
 local api = {}
 
@@ -30,14 +30,14 @@ local function completionWatcher()
         while true do
             coroutine.yield()
             counter = counter + 1
-            debugPrint(counter, false)
-            network.getUsers(function(messages, err)
-                if err then
-                    debugPrint(err, true)
-                else
-                    autocompletion = messages
-                end
-            end)
+            debugPrint("getUsers" .. counter, false)
+            -- network.getUsers(function(messages, err)
+            --     if err then
+            --         debugPrint(err, true)
+            --     else
+            --         autocompletion = messages
+            --     end
+            -- end)
         end
     end)
     local function checkCompletion()
@@ -61,7 +61,7 @@ end
 
 function api.setup()
     vim.api.nvim_create_user_command(
-        "Flash", -- string
+        "RemoteFlash", -- string
         function(opts)
             network.sendFlash(opts.args, config.options.defaultMessage)
         end, -- string or Lua function
@@ -71,7 +71,7 @@ function api.setup()
         }
     )
     vim.api.nvim_create_user_command(
-        "FlashMessage", -- string
+        "RemoteFlashMessage", -- string
         function(args)
             vim.ui.input({ prompt = "Message to Target: " }, function(message)
                 network.sendFlash(args.args, message)
@@ -84,4 +84,5 @@ function api.setup()
     )
     completionWatcher()
 end
+
 return api

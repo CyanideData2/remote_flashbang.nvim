@@ -1,4 +1,5 @@
-local config = require("flashbang.config")
+local config = require("remote_flashbang.config")
+local debugPrint = require("remote_flashbang.debug")
 
 local Network = {}
 
@@ -10,7 +11,7 @@ function Network.getFlash(callback)
         config.options.endpoint .. "/get_unread?username=" .. config.options.username,
     }, {}, function(result)
         if result.code ~= 0 then
-            callback(nil, "Error: Failed to fetch messages")
+            callback(nil, "Error: getFlash couldn't get messages")
             return
         end
 
@@ -53,9 +54,10 @@ end
 
 ---@return user[]
 function Network.getUsers(callback)
-    vim.system({ "curl", config.options.endpoint .. "/get_users_active" }, {}, function(result)
+    local url = config.options.endpoint .. "/get_users_active"
+    vim.system({ "curl", }, { url }, function(result)
         if result.code ~= 0 then
-            callback(nil, "Error: Failed to fetch messages")
+            callback(nil, "Error: getUsers couldn't get messages")
             return
         end
 

@@ -15,7 +15,8 @@ function grenade.pullPin()
                     print("Couldn't obtain flashes from server")
                 else
                     for _, v in pairs(messages) do
-                        flashbang.deploy()
+                        -- flashbang.deploy()
+                        print("bang!!!")
                     end
                 end
             end)
@@ -46,7 +47,7 @@ function grenade.pullPin()
     })
     vim.api.nvim_create_autocmd("FocusGained", {
         desc = "Re-enable https requests on focus",
-        group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+        group = vim.api.nvim_create_augroup("remote_flashbang_focus.nvim", { clear = true }),
         callback = function()
             if peakingTimer ~= nil then
                 debugPrint("checking again", true)
@@ -54,6 +55,7 @@ function grenade.pullPin()
             end
         end,
     })
+    debugPrint("api set")
 end
 
 return grenade
